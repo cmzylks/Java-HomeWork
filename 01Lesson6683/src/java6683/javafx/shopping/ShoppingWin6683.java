@@ -11,8 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
-public class ShoppingWinXXXX extends Application {
-
+public class ShoppingWin6683 extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -21,7 +20,6 @@ public class ShoppingWinXXXX extends Application {
     @Override
     public void start(Stage primaryStage) {
         VBox root = new VBox(20);
-
         Label lblStudent = new Label("填写自己的学号和姓名");
         BorderStroke bs = new BorderStroke(Paint.valueOf("#8FBC8F")
                 , BorderStrokeStyle.DOTTED
