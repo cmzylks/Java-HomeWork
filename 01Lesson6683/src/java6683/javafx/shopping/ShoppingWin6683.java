@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Elxect
- * @deprecated 超市购物
+ * @description  超市购物
  */
 public class ShoppingWin6683 extends Application {
 
@@ -102,6 +102,4 @@ public class ShoppingWin6683 extends Application {
 		primaryStage.setTitle("超市购物");
 		primaryStage.show();
 	}
-
-
 }
