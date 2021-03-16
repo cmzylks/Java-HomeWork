@@ -88,6 +88,7 @@ public class Words6683 extends Application {
 	/**
 	 * @param tfText 获取文本框输入
 	 * @return 返回匹配规则的字符串
+	 * @description 查找输入框中的三个字符的单词
 	 */
 	private String extractWords(TextField tfText) {
 		//获取输入框中输入的字符串
