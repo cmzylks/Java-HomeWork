@@ -208,7 +208,7 @@ public class CheckBlank6683 extends Application {
 			alert.show(); // 显示对话框
 			return;
 		}
-		Pattern p = null;
+		Pattern p;
 		try {
 			p = Pattern.compile(regex);
 		} catch (Exception e) {
