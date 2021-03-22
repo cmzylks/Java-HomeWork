@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="203.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="java6683.newdate.BirthDay6683Controller">
+    <children>
+        <HBox alignment="CENTER" prefHeight="63.0" prefWidth="380.0" spacing="20.0">
+            <children>
+                <Label text="出生日期："/>
+                <DatePicker fx:id="dpBirthDay" onAction="#change"/>
+            </children>
+        </HBox>
+        <Label fx:id="lblResult"/>
+        <Label text="by 212006683:郑逢">
+            <VBox.margin>
+                <Insets top="40.0"/>
+            </VBox.margin>
+        </Label>
+    </children>
+    <padding>
+        <Insets left="10.0" right="10.0"/>
+    </padding>
+
+</VBox>

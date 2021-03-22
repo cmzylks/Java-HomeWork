@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
+/**
+ * @author 郑逢
+ */
 public class MothersDay6683 extends Application  {
     public static void main(String[] args) {
         launch(args);
@@ -19,6 +22,7 @@ public class MothersDay6683 extends Application  {
         VBox root = FXMLLoader.load(url);
         Scene scene = new Scene(root,500,500);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("母亲节");
         primaryStage.show();
     }
 }
