@@ -34,12 +34,13 @@ public class Calendar6683Controller {
 	@FXML
 	void initialize() {
 		//7行7列
-		int col = 7;
-		int row = 7;
+		int col = gpDayList.getColumnConstraints().size();
+		int row = gpDayList.getRowConstraints().size();
 		//在GridPane中添加42个Label，第一行是星期，从第二行开始所以为1
 		for (int i = 1; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				Label label = new Label();
+				//为每个格子添加label
 				gpDayList.add(label, j, i);
 				//设置label元素居中
 				GridPane.setHalignment(label, HPos.CENTER);
