@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
 /**
@@ -57,23 +58,19 @@ public class Calendar6683Controller {
 	 * @description 显示日期的月月历
 	 */
 	void showMonth(LocalDate date) {
-		//月份的数字和中文数字格式
-		String[][] strArray = {{"1", "一"}, {"2", "二"}, {"3", "三"}, {"4", "四"}, {"5", "五"}, {"6", "六"}, {"7", "七"}, {"8", "八"}, {"9", "九"}, {"10", "十"}, {"11", "十一"}, {"12", "十二"}};
 		//月份
 		String monthValue;
+		DateTimeFormatter nTz = DateTimeFormatter.ofPattern("yyyy年MMMM");
 		try {
-			monthValue = String.valueOf(date.getMonthValue());
+			// 2021年三月    或字符串的日期格式化：
+			date.format(nTz);
+			monthValue = String.format("%tB", date);
 		} catch (Exception e) {
 			lblMonth.setText("请输入日期！");
 			return;
 		}
-		for (String[] strings : strArray) {
-			if (monthValue.equals(strings[0])) {
-				monthValue = strings[1];
-				break;
-			}
-		}
-		lblMonth.setText(date.getYear() + "年" + monthValue + "月");
+
+		lblMonth.setText(date.getYear() + "年" + monthValue);
 		//日期的月份的第一天。
 		LocalDate firstDay = date.with(TemporalAdjusters.firstDayOfMonth());
 		//获取当月的天数
