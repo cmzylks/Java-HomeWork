@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * @author 郑逢
@@ -45,7 +46,7 @@ public class BirthDay6683Controller {
 			lblResult.setText(age + "岁生日,生日快乐！");
 			//生日已过
 		} else if (day < 0) {
-			lblResult.setText("你的生日已经过啦！");
+			lblResult.setText("你的生日已经过啦！" + "距离下次生日还有" + (birthdayThisYear.with(TemporalAdjusters.lastDayOfYear()).getDayOfYear() + day));
 		} else {
 			lblResult.setText("还有" + day + "天," + age + "岁生日,有惊喜！");
 		}
