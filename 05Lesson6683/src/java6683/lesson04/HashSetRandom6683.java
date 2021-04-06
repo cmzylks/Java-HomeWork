@@ -3,6 +3,9 @@ package java6683.lesson04;
 import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * @author Elxect
+ */
 public class HashSetRandom6683 {
 	private static final int MAX = 80;
 	private static final int MIN = 50;
