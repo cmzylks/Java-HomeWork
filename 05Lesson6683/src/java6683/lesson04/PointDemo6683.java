@@ -52,7 +52,12 @@ public class PointDemo6683 {
 
 		@Override
 		public int compareTo(Point6683 o) {
-			return x - o.x;
+			if (this.x > o.x) {
+				return 1;
+			} else if (this.x < o.x) {
+				return -1;
+			}
+			return this.y - o.y;
 		}
 	}
 
