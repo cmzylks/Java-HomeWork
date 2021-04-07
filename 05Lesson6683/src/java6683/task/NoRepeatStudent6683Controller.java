@@ -1,7 +1,6 @@
 package java6683.task;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
@@ -45,7 +44,7 @@ public class NoRepeatStudent6683Controller {
 		selectShow();
 	}
 
-	public void addClick(ActionEvent actionEvent) {
+	public void addClick() {
 		//去除空格
 		String name = tfName.getText().trim().replaceAll(" ", "");
 		String age = tfAge.getText().trim().replaceAll(" ", "");
@@ -57,7 +56,7 @@ public class NoRepeatStudent6683Controller {
 		items.add(new Student6683(name, Integer.parseInt(age)));
 	}
 
-	public void changeClick(ActionEvent actionEvent) {
+	public void changeClick() {
 		String name = tfName.getText().trim().replaceAll(" ", "");
 		String age = tfAge.getText().trim().replaceAll(" ", "");
 		if (isNull(name, age)) {
@@ -74,7 +73,7 @@ public class NoRepeatStudent6683Controller {
 		items.set(index, selectedItem);
 	}
 
-	public void clearClick(ActionEvent actionEvent) {
+	public void clearClick() {
 		//创建新集合
 		Collection<Student6683> newArrays = new ArrayList<>();
 		//遍历旧集合去除重复的对象
@@ -118,22 +117,23 @@ public class NoRepeatStudent6683Controller {
 		try {
 			Integer.parseInt(age);
 		} catch (NumberFormatException nfe) {
-			alartShow("请输入正确的年龄！");
+			alertShow("请输入正确的年龄！");
 			return true;
 		}
 		//输入为空的情况
 		if (name.isEmpty() || age.isEmpty()) {
-			alartShow("请输入姓名和年龄！");
+			alertShow("请输入姓名和年龄！");
 			return true;
 		}
 		return false;
 	}
+
 	/**
 	 * 不合理情况提示框
 	 *
 	 * @param msg 提示的内容
 	 */
-	void alartShow(String msg) {
+	void alertShow(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText(msg);
 		alert.show();
