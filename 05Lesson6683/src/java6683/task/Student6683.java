@@ -1,5 +1,7 @@
 package java6683.task;
 
+import java.util.Objects;
+
 /**
  * @author Elxect
  * @date 2021/4/6 9:09 上午
@@ -30,6 +32,20 @@ public class Student6683 {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Student6683)) return false;
+		Student6683 that = (Student6683) o;
+		return age == that.age &&
+						Objects.equals(name, that.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, age);
 	}
 
 	@Override
