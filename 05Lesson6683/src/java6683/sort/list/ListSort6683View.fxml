@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="java6683.sort.list.ListSort6683ViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane prefHeight="465.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="java6683.sort.list.ListSort6683ViewController">
+    <children>
+        <ListView fx:id="lvScore" layoutX="212.0" layoutY="7.0" prefHeight="388.0" prefWidth="415.0"/>
+        <RadioButton userData="0" layoutX="33.0" selected="true" layoutY="102.0" mnemonicParsing="false" text="按成绩降序">
+            <toggleGroup>
+                <ToggleGroup fx:id="lvRadios"/>
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton userData="1" layoutX="33.0" layoutY="154.0" mnemonicParsing="false" text="按学期升序"
+                     toggleGroup="$lvRadios"/>
+        <RadioButton userData="2" layoutX="33.0" layoutY="201.0" mnemonicParsing="false" prefWidth="117.0" text="按学分升序"
+                     toggleGroup="$lvRadios"/>
+        <RadioButton userData="3" layoutX="33.0" layoutY="249.0" mnemonicParsing="false" text="按学期、学分升序"
+                     toggleGroup="$lvRadios"/>
+        <Label alignment="CENTER" layoutX="247.0" layoutY="423.0" prefHeight="18.0" prefWidth="179.0"
+               text="by 212006683：郑逢"/>
+    </children>
+</Pane>

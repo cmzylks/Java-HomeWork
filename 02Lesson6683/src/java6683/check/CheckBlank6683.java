@@ -138,22 +138,19 @@ public class CheckBlank6683 extends Application {
 										"System.out.println( 填空2 );"
 		};
 		//监听按钮1
-		rb1.selectedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				//清空两个输入框
-				tfInput.clear();
-				tfRegex.clear();
-				//清空输出结果
-				lblPrint.setText("");
-				//设置题目
-				taTitle.setText(topic[0]);
-				//为按钮注册监听事件
-				button.setOnAction(event -> {
-					//调用方法验证
-					verificationRegexTop1();
-				});
-			}
+		rb1.selectedProperty().addListener((observable, oldValue, newValue) -> {
+			//清空两个输入框
+			tfInput.clear();
+			tfRegex.clear();
+			//清空输出结果
+			lblPrint.setText("");
+			//设置题目
+			taTitle.setText(topic[0]);
+			//为按钮注册监听事件
+			button.setOnAction(event -> {
+				//调用方法验证
+				verificationRegexTop1();
+			});
 		});
 		//监听按钮2
 		rb2.selectedProperty().addListener(new ChangeListener<Boolean>() {
