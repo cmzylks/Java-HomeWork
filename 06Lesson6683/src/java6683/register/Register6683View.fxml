@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="java6683.register.Register6683Controller">
+    <center>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <Tab text="新用户注册">
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="10.0" prefWidth="140.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <Label text="用 户 名"/>
+                    <Label text="第一次输入密码" GridPane.rowIndex="1"/>
+                    <Label text="第二次输入密码" GridPane.rowIndex="2"/>
+                    <Label text="手机号码" GridPane.rowIndex="3"/>
+                    <TextField fx:id="tfName" onAction="#enterKey" GridPane.columnIndex="1"/>
+                    <PasswordField fx:id="pf1" onAction="#enterKey" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="1"/>
+                    <PasswordField fx:id="pf2" onAction="#enterKey" GridPane.columnIndex="1"
+                                   GridPane.rowIndex="2"/>
+                    <TextField fx:id="tfPhone" onAction="#enterKey" GridPane.columnIndex="1"
+                               GridPane.rowIndex="3"/>
+                    <Label fx:id="lblName" text="用户名不能为空且必须唯一" textFill="#db1616" visible="false"
+                           GridPane.columnIndex="2">
+                        <font>
+                            <Font size="14.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="lblPw1" text="密码的长度不能低于6位，而且至少应该包含1个大写字母、1个小写字母、1个数字" textFill="#db1616"
+                           visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <font>
+                            <Font size="14.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="lblPw2" text="两次密码必须一样" textFill="#db1616" visible="false"
+                           GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <font>
+                            <Font size="14.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="lblPhone" text="手机号码必须是11位的数字，并且必须以13、15、17、18开头" textFill="#db1616"
+                           visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <font>
+                            <Font size="14.0"/>
+                        </font>
+                    </Label>
+                    <Button fx:id="btnOk" defaultButton="true" mnemonicParsing="false" onAction="#okClick"
+                            text="注册" GridPane.rowIndex="4"/>
+                    <Button mnemonicParsing="false" onAction="#noClick" text="取消" GridPane.columnIndex="1"
+                            GridPane.halignment="CENTER" GridPane.rowIndex="4"/>
+                </GridPane>
+            </Tab>
+            <Tab text="已注册用户列表">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <ListView fx:id="lvUsers" layoutX="50.0" layoutY="19.0" prefHeight="293.0"
+                              prefWidth="409.0"/>
+                </AnchorPane>
+            </Tab>
+
+        </TabPane>
+    </center>
+    <bottom>
+        <Label text="by 212006683：郑逢" BorderPane.alignment="CENTER"/>
+    </bottom>
+</BorderPane>
