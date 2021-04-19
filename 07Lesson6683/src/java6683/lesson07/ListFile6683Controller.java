@@ -28,7 +28,7 @@ public class ListFile6683Controller {
 	public ObservableList<String> list;
 
 	public void listAll() {
-		String url = tfDir.getText().trim().replaceAll(" ", "");
+		String url = tfDir.getText().trim();
 		//统计文件夹数
 		int directoryCount = 0;
 		//统计文件数
@@ -52,7 +52,8 @@ public class ListFile6683Controller {
 		for (File item : files) {
 			if (item.isFile()) {
 				//文件
-				list.add(item.getName() + "----" + getDate(item.lastModified()) + "----" + String.format("%.2f", Double.parseDouble(df.format(item.length())) / 1024) + "KB");
+				list.add(item.getName() + "----" + getDate(item.lastModified()) + "----" +
+								String.format("%.2f", Double.parseDouble(df.format(item.length())) / 1024) + "KB");
 				fileCount++;
 			} else {
 				//目录
@@ -77,7 +78,8 @@ public class ListFile6683Controller {
 		//格式模版
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		//将时间戳转成标准的日期时间
-		LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(milliseconds / 1000, 0, ZoneOffset.ofHours(8));
+		LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(milliseconds / 1000,
+						0, ZoneOffset.ofHours(8));
 		return localDateTime.format(formatter);
 	}
 }
