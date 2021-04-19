@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -37,28 +38,31 @@ public class ListFile6683Controller {
 		url = url.length() == 0 ? "./" : url;
 		//创建file对象
 		File file = new File(url);
-		//输入的是目录
-		if (file.isDirectory()) {
-			//先清空
-			list.clear();
-			//获取目录下的所有子文件和子目录
-			File[] files = file.listFiles();
-			assert files != null;
-			//遍历所有子文件目录
-			for (File item : files) {
+		//先清空
+		list.clear();
+		//获取目录下的所有子文件和子目录
+		File[] files = file.listFiles();
+		DecimalFormat df = new DecimalFormat("#0.0");
+		if (files == null) {
+			list.add("目录不存在");
+			lblCount.setVisible(false);
+			return;
+		}
+		//遍历所有子文件目录
+		for (File item : files) {
+			if (item.isFile()) {
+				//文件
+				list.add(item.getName() + "----" + getDate(item.lastModified()) + "----" + String.format("%.2f", Double.parseDouble(df.format(item.length())) / 1024) + "KB");
+				fileCount++;
+			} else {
 				//目录
-				if (item.isDirectory()) {
-					list.add("文件夹：" + item.getName() + "----" + getDate(item.lastModified()));
-					directoryCount++;
-					//文件
-				} else {
-					list.add(item.getName() + "----" + getDate(item.lastModified()) + "----" + item.length() / 1024 + "KB");
-					fileCount++;
-				}
+				list.add("文件夹：" + item.getName() + "----" + getDate(item.lastModified()));
+				directoryCount++;
 			}
 		}
 		//渲染列表
 		lblCount.setText("子目录:" + directoryCount + ",文件：" + fileCount);
+		lblCount.setVisible(true);
 		//排序
 		list.sort(Comparator.reverseOrder());
 	}
