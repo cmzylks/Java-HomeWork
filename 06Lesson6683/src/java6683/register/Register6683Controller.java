@@ -57,6 +57,7 @@ public class Register6683Controller {
 		loseFocusListener();
 	}
 
+	@FXML
 	void enterKey(ActionEvent actionEvent) {
 		//获取当ENTER的对象
 		Object source = actionEvent.getSource();
@@ -72,6 +73,7 @@ public class Register6683Controller {
 		}
 	}
 
+	@FXML
 	void okClick() {
 		//全部检测通过
 		if (isMeets) {
@@ -84,6 +86,7 @@ public class Register6683Controller {
 		alertShow("注册失败，输入不合法!");
 	}
 
+	@FXML
 	void noClick() {
 		clear();
 	}
