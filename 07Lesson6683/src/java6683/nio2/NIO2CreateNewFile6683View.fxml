@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0"
+            prefWidth="605.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="java6683.nio2.CreateNewFile6683Controller">
+    <top>
+        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="新文件的名称："/>
+                <TextField fx:id="tfFilename" onAction="#listAll"/>
+            </children>
+        </HBox>
+    </top>
+    <bottom>
+        <Label text="by 212006683：郑逢" BorderPane.alignment="CENTER"/>
+    </bottom>
+    <center>
+        <Label fx:id="lblMessage" textFill="#7f0eab" wrapText="true" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+    </center>
+</BorderPane>
