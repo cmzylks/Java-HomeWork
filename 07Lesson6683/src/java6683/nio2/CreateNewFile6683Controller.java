@@ -24,9 +24,8 @@ public class CreateNewFile6683Controller {
 			File parentFile = file.getParentFile();
 			if (parentFile != null && !parentFile.exists()) {
 				Path path = Paths.get(parentFile.toURI());
-				System.out.println(path);
 				if (!parentFile.mkdirs()) {
-					if (Files.deleteIfExists(path)) {
+					if (!Files.deleteIfExists(path)) {
 						lblMessage.setText("不能创建目录：" + path);
 						return;
 					}

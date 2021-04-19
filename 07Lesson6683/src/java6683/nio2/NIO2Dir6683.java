@@ -8,22 +8,18 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-/**
- * @author Elxect
- * @date 2021/4/19 8:07 下午
- */
-public class NIO2NewFile6683 extends Application {
+public class NIO2Dir6683 extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		URL url = getClass().getResource("NIO2CreateNewFile6683View.fxml");
+		URL url = getClass().getResource("NIO2Dir6683View.fxml");
 		assert url != null;
 		Pane root = FXMLLoader.load(url);
 		primaryStage.setScene(new Scene(root));
-		primaryStage.setTitle("NIO2创建新文件");
+		primaryStage.setTitle("NIO2和TableView显示目录和内容");
 		primaryStage.show();
 	}
 }

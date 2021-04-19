@@ -19,7 +19,7 @@
         </HBox>
     </top>
     <bottom>
-        <Label text="by 学号：姓名" BorderPane.alignment="CENTER" />
+        <Label text="by 212006683：郑逢" BorderPane.alignment="CENTER" />
     </bottom>
     <center>
         <TableView fx:id="tableFiles" onMouseClicked="#doubleClick" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
