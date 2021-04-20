@@ -91,6 +91,6 @@ public class NIO2Dir6683Controller {
 		FileTime lastModifiedTime = Files.getLastModifiedTime(path);
 		Instant instant = lastModifiedTime.toInstant();
 		LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-		return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh-mm-ss"));
 	}
 }

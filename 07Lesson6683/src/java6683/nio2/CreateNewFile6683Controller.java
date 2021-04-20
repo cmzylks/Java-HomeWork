@@ -3,11 +3,8 @@ package java6683.nio2;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 /**
  * @author Elxect
@@ -19,21 +16,24 @@ public class CreateNewFile6683Controller {
 
 	public void listAll() throws IOException {
 		String fileName = tfFilename.getText().trim();
-		File file = new File(fileName);
-		if (!file.exists()) {
-			File parentFile = file.getParentFile();
-			if (parentFile != null && !parentFile.exists()) {
-				Path path = Paths.get(parentFile.toURI());
-				if (!parentFile.mkdirs()) {
-					if (!Files.deleteIfExists(path)) {
-						lblMessage.setText("不能创建目录：" + path);
-						return;
-					}
+		Path path = Paths.get(fileName);
+		if (!Files.exists(path)) {
+			Path parent = path.getParent();
+			System.out.println();
+			if (parent != null && !Files.exists(parent)) {
+				try {
+					Files.createDirectories(parent);
+					Files.createFile(path);
+				} catch (Exception e) {
+					lblMessage.setText("不能创建目录：" + parent.toAbsolutePath());
+					return;
 				}
-				lblMessage.setText("创建目录:" + parentFile);
+				lblMessage.setText("创建目录：" + path.toAbsolutePath());
+				return;
 			}
-			file.createNewFile();
-			lblMessage.setText("创建新文件：" + file.getAbsolutePath());
+
+			Files.createFile(path);
+			lblMessage.setText("创建新文件：" + path.toAbsolutePath());
 		} else {
 			lblMessage.setText("文件已存在");
 		}
