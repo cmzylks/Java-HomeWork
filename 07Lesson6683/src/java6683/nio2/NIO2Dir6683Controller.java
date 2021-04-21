@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,8 +19,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -37,6 +34,7 @@ public class NIO2Dir6683Controller {
 	public TableColumn<MyFile6683, String> colType;
 	public TableColumn<MyFile6683, String> colSize;
 	public ObservableList<MyFile6683> items;
+	public String absolutePath = null;
 	/**
 	 * 鼠标点击次数
 	 */
@@ -55,46 +53,30 @@ public class NIO2Dir6683Controller {
 		String pathName = tfDir.getText().trim();
 		pathName = pathName.length() == 0 ? "./" : pathName;
 		Path path = Paths.get(pathName);
-		items.clear();
-		if (Files.isDirectory(path)) {
-			try {
-				Stream<Path> list = Files.list(path);
-				list.forEach((Path item) -> items.add(getMyFile6683(item)));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
+		absolutePath = String.valueOf(path.getFileName());
+		showFileDirectory(path);
 	}
 
 	public void doubleClick(MouseEvent mouseEvent) {
+		//双击
 		if (mouseEvent.getClickCount() == CLICKCOUNT) {
+			//获取双击的对象
 			MyFile6683 selectedItem = tableFiles.getSelectionModel().getSelectedItem();
-			File file = new File(selectedItem.getName());
-			items.clear();
-			List<Path> list = new ArrayList<>();
-			List<Path> pathList = returnPathUrl(file, list);
-			for (Path path : pathList) {
-				if (Files.isRegularFile(path)) {
-					System.out.println(path);
-					items.add(getMyFile6683(path));
-				} else {
-					items.add(getMyFile6683(path));
-				}
-			}
+			Path path = Paths.get(selectedItem.getName());
+			//拼接路径
+			absolutePath += "\\" + path;
+			Path childPath = Paths.get(absolutePath);
+			//渲染子目录
+			showFileDirectory(childPath);
 		}
 	}
 
-	public List<Path> returnPathUrl(File dir, List<Path> fileList) {
-		File[] listFiles = dir.listFiles();
-		for (int i = 0; i < (listFiles != null ? listFiles.length : 0); i++) {
-			//判断读取的是否是目录
-			fileList.add(listFiles[i].toPath());
-		}
-		return fileList;
-	}
-
-
+	/**
+	 * 读取文件的属性设置文件属性
+	 *
+	 * @param path 路径
+	 * @return 文件对象
+	 */
 	public MyFile6683 getMyFile6683(Path path) {
 		DecimalFormat df = new DecimalFormat("#0.0");
 		String type = " ";
@@ -120,6 +102,24 @@ public class NIO2Dir6683Controller {
 		}
 		return myFile6683;
 	}
+
+	/**
+	 * 渲染路径下的文件和目录
+	 *
+	 * @param path 路径
+	 */
+	public void showFileDirectory(Path path) {
+		items.clear();
+		if (Files.isDirectory(path)) {
+			try {
+				Stream<Path> list = Files.list(path);
+				list.forEach((Path item) -> items.add(getMyFile6683(item)));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 	/**
 	 * 获取文件最后修改时间

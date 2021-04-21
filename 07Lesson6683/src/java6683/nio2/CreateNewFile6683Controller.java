@@ -16,16 +16,19 @@ public class CreateNewFile6683Controller {
 
 	public void listAll() throws IOException {
 		String fileName = tfFilename.getText().trim();
+		if (fileName.isEmpty()) {
+			lblMessage.setText("请输入内容");
+			return;
+		}
 		Path path = Paths.get(fileName);
 		if (!Files.exists(path)) {
 			Path parent = path.getParent();
-			System.out.println();
 			if (parent != null && !Files.exists(parent)) {
 				try {
 					Files.createDirectories(parent);
 					Files.createFile(path);
 				} catch (Exception e) {
-					lblMessage.setText("不能创建目录：" + parent.toAbsolutePath());
+					lblMessage.setText("不能创建目录：" + path.toAbsolutePath());
 					return;
 				}
 				lblMessage.setText("创建目录：" + path.toAbsolutePath());
