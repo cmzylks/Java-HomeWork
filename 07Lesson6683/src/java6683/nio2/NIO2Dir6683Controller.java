@@ -35,6 +35,8 @@ public class NIO2Dir6683Controller {
 	public TableColumn<MyFile6683, String> colSize;
 	public ObservableList<MyFile6683> items;
 	public String absolutePath = null;
+	public int countFile = 0;
+	public int countDirectory = 0;
 	/**
 	 * 鼠标点击次数
 	 */
@@ -55,6 +57,7 @@ public class NIO2Dir6683Controller {
 		Path path = Paths.get(pathName);
 		absolutePath = String.valueOf(path.getFileName());
 		showFileDirectory(path);
+		lblCount.setText("文件夹：" + countDirectory + ",文件:" + countFile);
 	}
 
 	public void doubleClick(MouseEvent mouseEvent) {
@@ -90,6 +93,9 @@ public class NIO2Dir6683Controller {
 		if (Files.isDirectory(path)) {
 			type = "文件夹";
 			size = " ";
+			countDirectory++;
+		} else {
+			countFile++;
 		}
 		MyFile6683 myFile6683 = new MyFile6683();
 		try {
