@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="629.0"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="java6683.lesson08.FileFilter6683Controller">
+   <top>
+      <HBox alignment="CENTER" prefHeight="65.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="目录名称：" />
+            <TextField fx:id="tfDir" onAction="#listFile" />
+            <Label fx:id="lblMsg" />
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <Label text="by 212006683：郑逢" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <ListView fx:id="lvFiles" prefHeight="141.0" prefWidth="387.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="10.0" />
+         </BorderPane.margin>
+      </ListView>
+   </center>
+   <left>
+      <VBox alignment="CENTER_LEFT" prefHeight="141.0" prefWidth="253.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <RadioButton fx:id="rb1" mnemonicParsing="false" selected="true" text="方法一：匿名内部类">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tg" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rb2" mnemonicParsing="false" text="方法二：Lambda表达式" toggleGroup="$tg" />
+            <RadioButton fx:id="rb3" mnemonicParsing="false" text="方法三：方法引用" toggleGroup="$tg" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+</BorderPane>

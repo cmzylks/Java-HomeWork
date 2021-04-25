@@ -35,10 +35,13 @@ public class NIO2Dir6683Controller {
 	public TableColumn<MyFile6683, String> colSize;
 	public ObservableList<MyFile6683> items;
 	public String absolutePath = null;
+	public int countFile;
+	public int countDirectory;
 	/**
 	 * 鼠标点击次数
 	 */
 	public final int CLICKCOUNT = 2;
+
 
 	@FXML
 	void initialize() {
@@ -51,15 +54,20 @@ public class NIO2Dir6683Controller {
 
 	public void listAll() {
 		String pathName = tfDir.getText().trim();
+		countFile=0;
+		countDirectory=0;
 		pathName = pathName.length() == 0 ? "./" : pathName;
 		Path path = Paths.get(pathName);
 		absolutePath = String.valueOf(path.getFileName());
 		showFileDirectory(path);
+		lblCount.setText("文件夹："+countDirectory+"，文件："+countFile);
 	}
 
 	public void doubleClick(MouseEvent mouseEvent) {
 		//双击
 		if (mouseEvent.getClickCount() == CLICKCOUNT) {
+			countFile=0;
+			countDirectory=0;
 			//获取双击的对象
 			MyFile6683 selectedItem = tableFiles.getSelectionModel().getSelectedItem();
 			Path path = Paths.get(selectedItem.getName());
@@ -68,6 +76,7 @@ public class NIO2Dir6683Controller {
 			Path childPath = Paths.get(absolutePath);
 			//渲染子目录
 			showFileDirectory(childPath);
+			lblCount.setText("文件夹："+countDirectory+"，文件："+countFile);
 		}
 	}
 
@@ -90,6 +99,9 @@ public class NIO2Dir6683Controller {
 		if (Files.isDirectory(path)) {
 			type = "文件夹";
 			size = " ";
+			countDirectory++;
+		}else {
+			countFile++;
 		}
 		MyFile6683 myFile6683 = new MyFile6683();
 		try {
