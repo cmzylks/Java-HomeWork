@@ -20,9 +20,10 @@ public class ListSort6683 extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		URL url = getClass().getResource("ListSort6683View.fxml");
+		assert url != null;
 		Pane root = FXMLLoader.load(url);
 		primaryStage.setScene(new Scene(root));
-		primaryStage.setTitle("对象排序（List）");
+		primaryStage.setTitle("Java8对象排序新方法");
 		primaryStage.show();
 	}
 }

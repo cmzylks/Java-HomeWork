@@ -87,7 +87,8 @@ public class ListSort6683ViewController {
 
 	void termCreditSort() {
 //		使用比较器排序	使用方法引用
-		courseList.sort(Comparator.comparing(Course6683::getTerm).thenComparing(Course6683::getCredit));
+		courseList.sort(Comparator.comparing(Course6683::getTerm).reversed().
+						thenComparing(Course6683::getCredit).reversed());
 		items.setAll(courseList);
 	}
 }

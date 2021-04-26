@@ -15,7 +15,7 @@
                      toggleGroup="$lvRadios"/>
         <RadioButton userData="2" layoutX="33.0" layoutY="201.0" mnemonicParsing="false" prefWidth="117.0" text="按学分升序"
                      toggleGroup="$lvRadios"/>
-        <RadioButton userData="3" layoutX="33.0" layoutY="249.0" mnemonicParsing="false" text="按学期、学分升序"
+        <RadioButton userData="3" layoutX="33.0" layoutY="249.0" mnemonicParsing="false" text="按学期升序、学分降序"
                      toggleGroup="$lvRadios"/>
         <Label alignment="CENTER" layoutX="247.0" layoutY="423.0" prefHeight="18.0" prefWidth="179.0"
                text="by 212006683：郑逢"/>
