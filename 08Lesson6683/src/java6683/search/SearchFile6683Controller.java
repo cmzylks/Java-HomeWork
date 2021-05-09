@@ -1,7 +1,6 @@
 package java6683.search;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,14 +34,14 @@ public class SearchFile6683Controller {
 		items = lvFiles.getItems();
 	}
 
-	public void listFiles(ActionEvent actionEvent) {
+	public void listFiles() {
 		String url = tfDir.getText().trim();
 		url = url.length() == 0 ? "./" : url;
 		File file = Paths.get(url).toFile();
 		setLvFiles(file);
 	}
 
-	public void showFiles(ActionEvent actionEvent) {
+	public void showFiles() {
 		//创建文件选择器对象
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		//显示并获取选中的文件对象
