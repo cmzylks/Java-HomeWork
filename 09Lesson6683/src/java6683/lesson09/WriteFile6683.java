@@ -16,21 +16,29 @@ public class WriteFile6683 {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("请输入文件名：");
 		String pathName = sc.nextLine();
-		write6683(pathName);
-		File file = new File(pathName);
-		System.out.println("已向"+file.getAbsoluteFile()+"中写入"+file.length()+"字节");
+		File file = new File(pathName.trim());
+//		如果filename中包含路径，必须确保路径已存在
+		File parentFile = file.getParentFile();
+		if (!parentFile.exists()) {
+			System.out.println("路径不存在");
+			return;
+		}
+		write6683(file);
+		System.out.println("已向" + file.getAbsoluteFile() + "中写入" + file.length() + "字节");
 	}
 
 	/**
 	 * 向文件写入数据
-	 * @param pathName 文件路径地址
+	 *
+	 * @param file 文件路径地址
 	 */
-	public static void write6683(String pathName) {
+	public static void write6683(File file) {
 		Scanner sc = new Scanner(System.in);
 		FileWriter fw = null;
+
 		try {
 			//创建字符流
-			fw = new FileWriter(pathName);
+			fw = new FileWriter(file);
 			System.out.println("请逐行输入要写入的内容，输入“end”结束：");
 			String str;
 			//存储输入的字符

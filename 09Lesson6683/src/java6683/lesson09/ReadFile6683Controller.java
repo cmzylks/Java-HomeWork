@@ -16,11 +16,11 @@ public class ReadFile6683Controller {
 
 	public void readFile() {
 		String pathName = tfFilename.getText();
-		File file = new File(pathName);
+		File file = new File(pathName.trim());
 		//创建字符缓存流对象
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			StringBuilder sb = new StringBuilder();
-			String line = null;
+			String line;
 			//保证读到的数据完整
 			while ((line = br.readLine()) != null) {
 				//读取一行后换行
