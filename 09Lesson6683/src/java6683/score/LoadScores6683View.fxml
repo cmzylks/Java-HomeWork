@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="java6683.score.LoadScores6683Controller">
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="82.0" prefWidth="570.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button minWidth="100.0" mnemonicParsing="false" onAction="#openFile" text="选择文件"/>
+                <Label fx:id="lblFilename" wrapText="true" HBox.hgrow="NEVER"/>
+            </children>
+            <BorderPane.margin>
+                <Insets left="30.0"/>
+            </BorderPane.margin>
+        </HBox>
+    </top>
+    <bottom>
+        <Label text="by 212006683：郑逢" BorderPane.alignment="CENTER"/>
+    </bottom>
+    <center>
+        <TableView fx:id="tvScores" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="colName" prefWidth="155.0" text="姓名"/>
+                <TableColumn fx:id="colChinese" prefWidth="88.0" text="语文"/>
+                <TableColumn fx:id="colMath" prefWidth="110.0" text="数学"/>
+                <TableColumn fx:id="colEnglish" prefWidth="107.0" text="英语"/>
+                <TableColumn fx:id="colSum" prefWidth="107.0" text="总分"/>
+            </columns>
+            <BorderPane.margin>
+                <Insets left="10.0"/>
+            </BorderPane.margin>
+        </TableView>
+    </center>
+
+</BorderPane>
