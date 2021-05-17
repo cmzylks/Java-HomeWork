@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0"
+            prefWidth="503.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="java6683.lesson10.TextFile6683Controller">
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="503.0" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#selectSource" text="选择源文件"/>
+                        <Label fx:id="lblSource"/>
+                    </children>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="503.0" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#selectTarget" text="选择目标文件"/>
+                        <Label fx:id="lblTarget"/>
+                    </children>
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="28.0" prefWidth="503.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#copyFile" text="复制"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <bottom>
+        <Label text="by 212006683：郑逢" BorderPane.alignment="CENTER"/>
+    </bottom>
+    <center>
+        <TextArea fx:id="taText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <padding>
+                <Insets left="10.0" right="10.0"/>
+            </padding>
+        </TextArea>
+    </center>
+</BorderPane>
