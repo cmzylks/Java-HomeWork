@@ -35,6 +35,8 @@ public class StudyDataFile6683 {
 
     public static void main(String[] args) throws Exception {
         writeIntWithByte6683();
+        readData6683();
+        writeData6683();
         readIntWithByte6683();
     }
 
