@@ -8,35 +8,45 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaXXXX.task.EditorXXXXController">
-        <top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="724.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="java6683.task.Editor6683Controller">
+    <top>
 
-                    <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="503.0" spacing="10.0">
-                        <children>
-                            <Label text="正在编辑的文件：" />
-                            <TextField fx:id="tfFilename" editable="false" prefHeight="36.0" prefWidth="332.0" />
-                            <Button mnemonicParsing="false" onAction="#openFile" text="打开" />
-                            <Button mnemonicParsing="false" onAction="#saveFile" text="保存" />
-                            <Button mnemonicParsing="false" onAction="#saveAsFile" text="另存" />                    </children>
-                        <opaqueInsets>
-                            <Insets />
-                        </opaqueInsets>
-                        <padding>
-                            <Insets left="10.0" />
-                        </padding>
-                    </HBox>
-           </top>
-        <bottom>
-            <Label text="by 学号：姓名" BorderPane.alignment="CENTER" />
-        </bottom>
-        <center>
-            <TextArea fx:id="taText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                <opaqueInsets>
-                    <Insets />
-                </opaqueInsets>
-                <padding>
-                    <Insets left="10.0" right="10.0" />
-                </padding>
-            </TextArea>
-        </center>
-    </BorderPane>
+        <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="503.0" spacing="10.0" style="-fx-background-color: #ffffff;">
+            <children>
+                <Label text="正在编辑的文件：" />
+                <TextField fx:id="tfFilename" editable="false" prefHeight="36.0" prefWidth="332.0" style="-fx-background-color: #ffffff; -fx-border-color: #bdc3c7; -fx-border-radius: 5px;" />
+                <Button mnemonicParsing="false" onAction="#openFile" style="-fx-background-color: #2e86de; -fx-cursor: hand;" text="打开" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></Button>
+                <Button mnemonicParsing="false" onAction="#saveFile" style="-fx-background-color: #eb4d4b; -fx-cursor: hand;" text="保存" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin></Button>
+                <Button mnemonicParsing="false" onAction="#saveAsFile" style="-fx-background-color: #2ecc71; -fx-cursor: hand;" text="另存为" textFill="WHITE">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </HBox>
+    </top>
+    <bottom>
+        <Label style="-fx-background-color: #ffffff;" text="by 212006683：郑逢" BorderPane.alignment="CENTER" />
+    </bottom>
+    <center>
+        <TextArea fx:id="taText" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <padding>
+                <Insets left="10.0" right="10.0" />
+            </padding>
+        </TextArea>
+    </center>
+</BorderPane>
