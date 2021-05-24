@@ -50,7 +50,7 @@ public class Select6683 {
             while (resultSet.next()) {
                 sno = resultSet.getString("sno");
                 sname = resultSet.getString(3);
-                System.out.printf("%-4d,%9s,%-10s\n", resultSet.getInt(1), sno, sname);
+                System.out.printf("%d,%9s,%-10s\n", resultSet.getInt(1), sno, sname);
             }
             resultSet.close();
         } catch (SQLException sqlException) {
