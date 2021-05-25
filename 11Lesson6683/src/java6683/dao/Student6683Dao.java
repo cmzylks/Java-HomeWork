@@ -29,7 +29,8 @@ public class Student6683Dao {
 			stmt.setString(1, student6683.getSno());
 			stmt.setString(2, student6683.getsName());
 			stmt.executeUpdate();
-			//执行INSERT语句后，利用PrepareStatement的getGeneratedKeys()方法返回的ResultSet，读取新增记录的id值（id是自增长列）
+			//执行INSERT语句后，利用PrepareStatement的getGeneratedKeys()方法返回的ResultSet
+			//读取新增记录的id值（id是自增长列）
 			rs = stmt.getGeneratedKeys();
 			//为参数student对象设置id值
 			student6683.setId(rs.getInt(1));
@@ -44,6 +45,13 @@ public class Student6683Dao {
 		return id;
 	}
 
+	/**
+	 * 修改数据表xslist中的某行记录
+	 *
+	 * @param id         用于定位xslist表中要修改的记录
+	 * @param newStudent 对象中各属性的值，修改xslist表中对应的字段
+	 * @return 返回1表示已修改，返回-1表示未修改
+	 */
 	public static int update6683(int id, Student6683 newStudent) {
 		int i = 0;
 		try {
@@ -67,6 +75,12 @@ public class Student6683Dao {
 		return i;
 	}
 
+	/**
+	 * 从数据表xslist中删除一行记录
+	 *
+	 * @param id 用于定位xslist表中要删除的记录
+	 * @return 返回1表示已删除，返回-1表示未删除
+	 */
 	public static int delete6683(int id) {
 		int i = 0;
 		try {
@@ -86,7 +100,12 @@ public class Student6683Dao {
 		return i;
 	}
 
-
+	/**
+	 * 从数据表xslist中读取数据加载到List<Student6683>集合中
+	 *
+	 * @return List<Student>集合，数据表中的每行记录对应集合中的一个Student对象
+	 * （表中没有数据，则返回null）
+	 */
 	public static List<Student6683> findAll6683() {
 		List<Student6683> list = new ArrayList<>();
 		try {
@@ -118,7 +137,15 @@ public class Student6683Dao {
 		return list.size() == 0 ? null : list;
 	}
 
+	/**
+	 * 按学号在数据表中查找，返回该学号对应的Student对象
+	 *
+	 * @param sno 要查找的学号
+	 * @return 返回找到的Student对象（没有找到返回null）
+	 */
 	public static Student6683 findStudent6683(String sno) {
+		//实例化学生对象
+		Student6683 student6683 = null;
 		try {
 			conn = DBUtil6683.getConnection();
 			String sql = "select * from xslist where sno = ?";
@@ -126,20 +153,23 @@ public class Student6683Dao {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, sno);
 			rs = stmt.executeQuery();
-			//实例化学生对象
-			Student6683 student6683 = new Student6683();
-			//设置对应的每个属性
-			student6683.setId(rs.getInt("id"));
-			student6683.setSno(rs.getString("sno"));
-			student6683.setsName(rs.getString("sname"));
-			student6683.setLx1(rs.getInt("lx1"));
-			student6683.setLx2(rs.getInt("lx2"));
+			//如果有查到对象
+			if (rs.next()) {
+				//实例化Student对象
+				student6683 = new Student6683();
+				//设置对应的每个属性
+				student6683.setId(rs.getInt("id"));
+				student6683.setSno(rs.getString("sno"));
+				student6683.setsName(rs.getString("sname"));
+				student6683.setLx1(rs.getInt("lx1"));
+				student6683.setLx2(rs.getInt("lx2"));
+			}
 		} catch (SQLException e) {
 			System.out.println("数据库连接异常");
 		} finally {
 			//关闭资源
 			DBUtil6683.close(rs, stmt, conn);
 		}
-		return null;
+		return student6683;
 	}
 }
