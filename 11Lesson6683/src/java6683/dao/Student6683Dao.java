@@ -27,7 +27,7 @@ public class Student6683Dao {
 			stmt = conn.prepareStatement(sql);
 			// 将student对象的属性作为INSERT语句的参数
 			stmt.setString(1, student6683.getSno());
-			stmt.setString(2, student6683.getsName());
+			stmt.setString(2, student6683.getName());
 			stmt.executeUpdate();
 			//执行INSERT语句后，利用PrepareStatement的getGeneratedKeys()方法返回的ResultSet
 			//读取新增记录的id值（id是自增长列）
@@ -60,7 +60,7 @@ public class Student6683Dao {
 			// 使用PrepareStatement执行update语句
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, newStudent.getSno());
-			stmt.setString(2, newStudent.getsName());
+			stmt.setString(2, newStudent.getName());
 			stmt.setInt(3, newStudent.getLx1());
 			stmt.setInt(4, newStudent.getLx2());
 			stmt.setInt(5, id);
