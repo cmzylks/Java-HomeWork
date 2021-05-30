@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.util.Optional;
 
+/**
+ * @author Elxect
+ */
 public class Dialog6683Controller {
 
 	@FXML
