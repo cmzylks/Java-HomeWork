@@ -1,10 +1,12 @@
-package java6683.lesson12;
+package java6683.task;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.OptionalDouble;
-import java.util.OptionalInt;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -13,29 +15,37 @@ import java.util.OptionalInt;
 public class CourseStream6683 {
 
 	public static void main(String[] args) {
-		System.out.println("=====85分以上的课程名单=====");
-		long count = getCourses().stream().filter(item -> item.getScore() >= 85).count();
-		System.out.println("共" + count + "门");
-		getCourses().stream().filter(item -> item.getScore() >= 85).forEach(System.out::println);
-		OptionalDouble average = getCourses().stream().mapToInt(Course6683::getScore).average();
-		if (average.isPresent()) {
-			System.out.printf("【1】所有的课程的平均值：%.2f\n", average.getAsDouble());
-		}
-		System.out.println("【2】最高分的课程：");
-		OptionalInt max = getCourses().stream().mapToInt(Course6683::getScore).max();
-		if (max.isPresent()) {
-			getCourses().stream().filter(item -> item.getScore() == max.getAsInt()).forEach(System.out::println);
-		}
-		System.out.println("【3】最低分的课程：");
-		OptionalInt min = getCourses().stream().mapToInt(Course6683::getScore).min();
-		if (min.isPresent()) {
-			getCourses().stream().filter(item -> item.getScore() == min.getAsInt()).forEach(System.out::println);
-		}
+		//收集数据中的学期
+		Stream<String> terms = getCourses().stream()
+						.map(Course6683::getTerm)
+						.distinct();
+		terms.forEach(CourseStream6683::semesterGroup);
+	}
 
+	/**
+	 * 显示每学期的课程
+	 *
+	 * @param term 学期
+	 */
+	public static void semesterGroup(String term) {
+		//根据学期收集课程
+		List<Course6683> oneList = getCourses().stream()
+						.filter(item -> term.equals(item.getTerm()))
+						.sorted(Comparator.comparing(Course6683::getScore))
+						.collect(Collectors.toList());
+		//计算平均值
+		OptionalDouble average = oneList.stream()
+						.mapToInt(Course6683::getScore)
+						.average();
+		System.out.println("====" + term + "====");
+		if (average.isPresent()) {
+			System.out.println("共" + oneList.size() + "课程，平均分：" + average.getAsDouble());
+		}
+		oneList.forEach(System.out::println);
 	}
 
 	private static List<Course6683> getCourses() {
-		List<Course6683> courses = new ArrayList<Course6683>();
+		List<Course6683> courses = new ArrayList<>();
 		courses.add(new Course6683("A001", "C程序设计基础", "1上", 4, 80));
 		courses.add(new Course6683("A004", "离散数学", "1下", 3, 79));
 		courses.add(new Course6683("B002", "Pthon程序基础", "1下", 2, 85));
