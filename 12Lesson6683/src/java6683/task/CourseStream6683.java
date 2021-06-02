@@ -18,7 +18,9 @@ public class CourseStream6683 {
 		//收集数据中的学期
 		Stream<String> terms = getCourses().stream()
 						.map(Course6683::getTerm)
-						.distinct();
+						.distinct().sorted();
+
+
 		terms.forEach(CourseStream6683::semesterGroup);
 	}
 
