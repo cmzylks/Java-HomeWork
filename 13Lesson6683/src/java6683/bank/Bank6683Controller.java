@@ -22,27 +22,33 @@ public class Bank6683Controller {
 	public Label lblBalance;
 	public TextArea taResult;
 	private BankAccount6683 bankAccount6683;
-	private Thread thread;
 
 	public void start6683() {
 		taResult.clear();
 		//账户ID
-		String bankId = tfBankID.getText();
+		String bankId = tfBankID.getText().trim();
+		if (bankId.isEmpty()) {
+			alertShow("银行账号不能为空！");
+			return;
+		}
 		//账户余额
-		Double balance = Double.parseDouble(tfBalance0.getText().trim());
+		String balance = tfBalance0.getText().trim();
+		if (!isInteger(balance)) {
+			alertShow("请输入正确格式的余额！");
+			return;
+		}
 		AtomicInteger threadName = new AtomicInteger();
+		bankAccount6683 = new BankAccount6683(bankId, Double.parseDouble(balance));
 		//根据输入创建银行账户
-		bankAccount6683 = new BankAccount6683(bankId, balance);
 		if (bankAccount6683.getBalance() >= 0) {
 			String taMoneyText = taMoney.getText().trim();
 			Stream<String> moneyStream = Stream.of(taMoneyText.split("\n"));
 			moneyStream.filter(this::isInteger).forEach(item -> {
-			new Thread(this::run6683, item + ",线程" + threadName.incrementAndGet()).start();
+				new Thread(this::run6683, item + ",线程" + threadName.incrementAndGet()).start();
 			});
 		} else {
 			alertShow("初始余额不能小于0");
 		}
-
 	}
 
 	public void run6683() {
@@ -55,6 +61,7 @@ public class Bank6683Controller {
 		} else {
 			action = "取款" + money;
 		}
+		//加锁
 		synchronized (bankAccount6683) {
 			b = bankAccount6683.getBalance() + money;
 			if (b < 0) {
@@ -70,17 +77,28 @@ public class Bank6683Controller {
 			}
 			Platform.runLater(() -> {
 				lblBalance.setText("最终余额:" + bankAccount6683.getBalance());
-				taResult.appendText(operation+"\n");
+				taResult.appendText(operation + "\n");
 			});
 		}
 	}
 
+	/**
+	 * 提示框
+	 *
+	 * @param msg
+	 */
 	public void alertShow(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText(msg);
 		alert.show();
 	}
 
+	/**
+	 * 判断是否输入整数
+	 *
+	 * @param str
+	 * @return
+	 */
 	public boolean isInteger(String str) {
 		Pattern pattern = Pattern.compile("^[-\\+]?[\\d][^\\n\\r]*$");
 		return pattern.matcher(str).matches();
