@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="java6683.bank.Bank6683Controller">
+   <top>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="763.0">
+               <children>
+                  <Label text="银行账号ID：" />
+                  <TextField fx:id="tfBankID" prefHeight="36.0" prefWidth="129.0">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="初始余额：" />
+                  <TextField fx:id="tfBalance0" prefHeight="36.0" prefWidth="145.0" />
+               </children>
+            </HBox>
+            <Label fx:id="lblErrMsg" textFill="#bf2e2e" />
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <HBox alignment="CENTER" prefHeight="328.0" prefWidth="239.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="54.0" prefWidth="126.0" text="请逐行输入存取款金额" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="taMoney" prefHeight="328.0" prefWidth="133.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </left>
+   <bottom>
+      <VBox alignment="CENTER" prefHeight="91.0" prefWidth="636.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="46.0" prefWidth="763.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#start6683" prefHeight="71.0" prefWidth="80.0" text="Start" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Label fx:id="lblBalance" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <Label prefHeight="5.0" prefWidth="117.0" text="by 212006683：郑逢" />
+         </children>
+      </VBox>
+   </bottom>
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="运行结果">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="taResult" editable="false" prefHeight="263.0" prefWidth="313.0" />
+         </children>
+      </HBox>
+   </center>
+</BorderPane>
