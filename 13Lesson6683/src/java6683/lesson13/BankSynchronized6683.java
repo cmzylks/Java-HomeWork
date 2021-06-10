@@ -25,22 +25,22 @@ public class BankSynchronized6683 {
 		String name = Thread.currentThread().getName();
 		String action = "";
 		double money = 0, b;
-		if ("会计".equals(name)) {
+		if (name.equals("会计")) {
 			money = 300;
 			action = "存入";
-		} else if ("出纳".equals(name)) {
+		} else if (name.equals("出纳")) {
 			money = -100;
 			action = "取出";
 		}
-		for (int i = 1; i <= 3; i++) {
-			b = account.getBalance() + money;
-			System.out.println(name + action + Math.abs(money));
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			synchronized (account){
+		synchronized (account) {
+			for (int i = 1; i <= 3; i++) {
+				b = account.getBalance() + money;
+				System.out.println(name + action + Math.abs(money));
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				account.setBalance(b);
 			}
 		}
