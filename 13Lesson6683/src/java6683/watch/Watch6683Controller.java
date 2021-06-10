@@ -1,8 +1,8 @@
 package java6683.watch;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -14,6 +14,8 @@ import javafx.util.StringConverter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,9 +26,11 @@ public class Watch6683Controller {
 	public ListView<WatchKey> lvWatches;
 	public Button btnWork;
 	public TextArea taRecords;
-	private ObservableList<WatchKey> items;
+	private static ObservableList<WatchKey> items;
 	private boolean flag;
-	private WatchService watcher;
+	private static Path absolutePath;
+	private static String kindName;
+	private static boolean keepRunning;
 
 	@FXML
 	void initialize() {
@@ -45,13 +49,13 @@ public class Watch6683Controller {
 		lvWatches.setCellFactory(TextFieldListCell.forListView(converter));
 	}
 
-	public void addDir() throws IOException, InterruptedException {
+	public void addDir() throws IOException {
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		File file = directoryChooser.showDialog(new Stage());
-		if (file.exists()) {
+		if (null != file) {
 			items = lvWatches.getItems();
 			//创建文件监视器
-			watcher = FileSystems.getDefault().newWatchService();
+			WatchService watcher = FileSystems.getDefault().newWatchService();
 			//指定监听那些变化
 			WatchEvent.Kind[] kinds = {
 							// 新增
@@ -76,38 +80,62 @@ public class Watch6683Controller {
 
 	public void work() {
 		if (!flag) {
-			try {
-				startWatch();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if (items.size() == 0) {
+				alertShow("请先添加目录！！");
+				return;
 			}
+			keepRunning = true;
+			new Thread(() -> startWatch()).start();
 			btnWork.setText("停止监控");
 			flag = true;
 		} else {
+			stopWatch();
 			btnWork.setText("记录修改记录");
 			flag = false;
 		}
-
 	}
 
-	public void clearRecords(ActionEvent actionEvent) {
-
-
+	public void clearRecords() {
+		if (flag) {
+			alertShow("请先停止监控！！");
+		} else {
+			taRecords.clear();
+		}
 	}
 
-	public void startWatch() throws InterruptedException {
-		WatchKey key = watcher.take();
-		List<WatchEvent<?>> watchEvents = key.pollEvents();
-		for (WatchEvent<?> watchEvent : watchEvents) {
-			String msg = String.format("变化类型：%s，变化对象：%s\n",
-							watchEvent.kind().name(),
-							watchEvent.context().toString());
-			taRecords.appendText(msg);
+	void startWatch() {
+		taRecords.appendText(getTime() + "：WatchService服务已启动\n");
+		taRecords.appendText(getTime() + "：开始记录修改历史\n");
+		while (keepRunning) {
+			items.forEach(key -> {
+				List<WatchEvent<?>> watchEvents = key.pollEvents();
+				watchEvents.forEach(event -> {
+					String url = event.context().toString();
+					absolutePath = Paths.get(url).toAbsolutePath();
+					kindName = event.kind().name();
+					taRecords.appendText(absolutePath.toString() + "\n");
+					taRecords.appendText(getTime() + "====>" + kindName + "\n");
+					key.reset();
+				});
+			});
+
 		}
 	}
 
 
 	public void stopWatch() {
+		taRecords.appendText(getTime() + "：WatchService服务已停止\n");
+		keepRunning = false;
 
+	}
+
+	public static String getTime() {
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+	}
+
+	public void alertShow(String msg) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setContentText(msg);
+		alert.show();
 	}
 }
