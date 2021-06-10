@@ -27,9 +27,21 @@ public class Watch6683Controller {
 	public Button btnWork;
 	public TextArea taRecords;
 	private static ObservableList<WatchKey> items;
+	/**
+	 * 按钮修改标记
+	 */
 	private boolean flag;
+	/**
+	 * 文件路径
+	 */
 	private static Path absolutePath;
+	/**
+	 * 文件操作类型
+	 */
 	private static String kindName;
+	/**
+	 * 线程标记
+	 */
 	private static boolean keepRunning;
 
 	@FXML
@@ -71,6 +83,9 @@ public class Watch6683Controller {
 		}
 	}
 
+	/**
+	 * 删除目录
+	 */
 	public void cancel() {
 		int selectedIndex = lvWatches.getSelectionModel().getSelectedIndex();
 		if (selectedIndex != -1) {
@@ -85,7 +100,7 @@ public class Watch6683Controller {
 				return;
 			}
 			keepRunning = true;
-			new Thread(() -> startWatch()).start();
+			new Thread(this::startWatch).start();
 			btnWork.setText("停止监控");
 			flag = true;
 		} else {
@@ -95,6 +110,9 @@ public class Watch6683Controller {
 		}
 	}
 
+	/**
+	 * 清空记录
+	 */
 	public void clearRecords() {
 		if (flag) {
 			alertShow("请先停止监控！！");
@@ -103,18 +121,26 @@ public class Watch6683Controller {
 		}
 	}
 
+	/**
+	 * 开始监听
+	 */
 	void startWatch() {
 		taRecords.appendText(getTime() + "：WatchService服务已启动\n");
 		taRecords.appendText(getTime() + "：开始记录修改历史\n");
+		//通过标记开启或关闭线程
 		while (keepRunning) {
+			//遍历watchKey集合
 			items.forEach(key -> {
+				//获取消息队列
 				List<WatchEvent<?>> watchEvents = key.pollEvents();
+				//获取具体操作
 				watchEvents.forEach(event -> {
 					String url = event.context().toString();
 					absolutePath = Paths.get(url).toAbsolutePath();
 					kindName = event.kind().name();
 					taRecords.appendText(absolutePath.toString() + "\n");
 					taRecords.appendText(getTime() + "====>" + kindName + "\n");
+					//重置watchKey
 					key.reset();
 				});
 			});
@@ -122,17 +148,28 @@ public class Watch6683Controller {
 		}
 	}
 
-
+	/**
+	 * 停止监听
+	 */
 	public void stopWatch() {
 		taRecords.appendText(getTime() + "：WatchService服务已停止\n");
 		keepRunning = false;
-
 	}
 
+	/**
+	 * 获取当前时间
+	 *
+	 * @return
+	 */
 	public static String getTime() {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 	}
 
+	/**
+	 * 提示窗
+	 *
+	 * @param msg
+	 */
 	public void alertShow(String msg) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText(msg);
